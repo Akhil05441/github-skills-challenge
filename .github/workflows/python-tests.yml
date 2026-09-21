@@ -1,5 +1,4 @@
 name: Python Test Suite
-
 on:
   pull_request:
     branches:
@@ -34,4 +33,4 @@ jobs:
 
       - name: Run unit tests with detailed output
         run: |
-          pytest -vv --cov=src --cov-report=term-missing --maxfail=1
+          python -m pytest -vv --cov=src --cov-report=term-missing --maxfail=1
