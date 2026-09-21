@@ -1,0 +1,37 @@
+name: Python Test Suite
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Install test and coverage tools
+        run: |
+          python -m pip install pytest-cov coverage
+
+      - name: Run unit tests with detailed output
+        run: |
+          pytest -vv --cov=src --cov-report=term-missing --maxfail=1
