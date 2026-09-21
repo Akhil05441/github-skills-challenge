@@ -1,5 +1,4 @@
 name: Python Coverage
-
 on:
   pull_request:
     branches:
